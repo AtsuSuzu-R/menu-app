@@ -1,9 +1,9 @@
 import "./App.css";
-
+import Home from "./Home";
 function App() {
   return (
     <>
-      <h1>Menu</h1>
+      <Home />
     </>
   );
 }
