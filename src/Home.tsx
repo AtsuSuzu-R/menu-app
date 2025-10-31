@@ -6,14 +6,14 @@ import OrderHistory from "./OrderHistory";
 import { type MenuItem } from "./menuData";
 import MenuIndex from "./Menu.Index";
 
+type TabType = "input" | "cart" | "history" | "menu";
+
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<
-    "input" | "cart" | "history" | "menu"
-  >("input");
+  const [activeTab, setActiveTab] = useState<TabType>("input");
   const [cartItems, setCartItems] = useState<MenuItem[]>([]);
 
-  const addToCart = (menu: MenuItem) => {
-    setCartItems((prev) => [...prev, menu]);
+  const addToCart = (menu: MenuItem): void => {
+    setCartItems((prev: MenuItem[]) => [...prev, menu]);
   };
 
   return (

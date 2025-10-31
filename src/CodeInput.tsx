@@ -14,11 +14,13 @@ interface CodeInputProps {
 }
 
 export default function CodeInput({ onAddToCart }: CodeInputProps) {
-  const [num, setNum] = useState("");
-  const [selectedMenu, setSelectedMenu] = useState<MenuItem | null>();
-  const [open, setOpen] = useState(false);
+  const [num, setNum] = useState<string>("");
+  const [selectedMenu, setSelectedMenu] = useState<
+    MenuItem | null | undefined
+  >();
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleNumberClick = (value: string) => {
+  const handleNumberClick = (value: string): void => {
     // フォーカスを外す
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
@@ -39,12 +41,12 @@ export default function CodeInput({ onAddToCart }: CodeInputProps) {
     }
   }, [num]);
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
     setNum(""); // 次の入力に備えてクリア
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (): void => {
     if (selectedMenu) {
       onAddToCart(selectedMenu);
       handleClose();
