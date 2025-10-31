@@ -1,12 +1,26 @@
-type MenuItem = {
-  code: string;
-  name: string;
-  priceWithoutTax: number;
-  priceWithTax: number;
-};
+import { Button } from "@mui/material";
+import { type MenuItem } from "./menuData";
 
-export default function OrderCart(menu: MenuItem | null) {
-  if (!menu) return;
-  console.log("追加されたメニュー:", menu);
-  // ここでカートに追加する処理を書く
+interface OrderCartProps {
+  cartItems: MenuItem[];
+}
+
+export default function OrderCart({ cartItems }: OrderCartProps) {
+  return (
+    <div>
+      <h2>注文かご</h2>
+      {cartItems.length === 0 ? (
+        <p>カートは空です</p>
+      ) : (
+        <ul>
+          {cartItems.map((item, index) => (
+            <li key={index}>
+              {item.name} - {item.priceWithTax}円
+            </li>
+          ))}
+        </ul>
+      )}
+      <Button>注文を送信する</Button>
+    </div>
+  );
 }

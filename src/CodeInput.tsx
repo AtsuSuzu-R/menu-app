@@ -8,14 +8,22 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { findMenuByCode, type MenuItem } from "./menuData";
-import OrderCart from "./OrderCart";
 
-export default function CodeInput() {
+interface CodeInputProps {
+  onAddToCart: (menu: MenuItem) => void;
+}
+
+export default function CodeInput({ onAddToCart }: CodeInputProps) {
   const [num, setNum] = useState("");
   const [selectedMenu, setSelectedMenu] = useState<MenuItem | null>();
   const [open, setOpen] = useState(false);
 
   const handleNumberClick = (value: string) => {
+    // フォーカスを外す
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     setNum((prev) => {
       const next = prev + value;
       return next.length <= 4 ? next : value; // 5桁目でリセットして新しい入力開始
@@ -26,10 +34,8 @@ export default function CodeInput() {
   useEffect(() => {
     if (num.length === 4) {
       const menu = findMenuByCode(num);
-      if (menu) {
-        setSelectedMenu(menu);
-        setOpen(true);
-      }
+      setSelectedMenu(menu);
+      setOpen(true);
     }
   }, [num]);
 
@@ -38,6 +44,12 @@ export default function CodeInput() {
     setNum(""); // 次の入力に備えてクリア
   };
 
+  const handleAddToCart = () => {
+    if (selectedMenu) {
+      onAddToCart(selectedMenu);
+      handleClose();
+    }
+  };
   return (
     <div className="menu-num">
       <TextField
@@ -117,13 +129,16 @@ export default function CodeInput() {
           )}
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => OrderCart(selectedMenu)}
-            variant="contained"
-            color="primary"
-          >
-            追加
-          </Button>
+          {selectedMenu && (
+            <Button
+              onClick={handleAddToCart}
+              variant="contained"
+              color="primary"
+            >
+              追加
+            </Button>
+          )}
+
           <Button onClick={handleClose} variant="contained" color="primary">
             閉じる
           </Button>
