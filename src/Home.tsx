@@ -2,6 +2,7 @@ import { useState } from "react";
 import CodeInput from "./CodeInput";
 import "./Home.css";
 import MenuIndex from "./Menu.Index";
+import OrderCart from "./OrderCart";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<
@@ -21,7 +22,7 @@ export default function Home() {
         {activeTab === "cart" && (
           <div>
             <h2>注文かご</h2>
-            <p>注文したメニューがここに表示されます</p>
+            <OrderCart />
           </div>
         )}
 

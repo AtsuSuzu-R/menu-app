@@ -1,12 +1,41 @@
 import "./CodeInput.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { findMenuByCode, type MenuItem } from "./menuData";
+import OrderCart from "./OrderCart";
 
 export default function CodeInput() {
   const [num, setNum] = useState("");
+  const [selectedMenu, setSelectedMenu] = useState<MenuItem | null>();
+  const [open, setOpen] = useState(false);
 
   const handleNumberClick = (value: string) => {
-    setNum(num + value);
+    setNum((prev) => {
+      const next = prev + value;
+      return next.length <= 4 ? next : value; // 5桁目でリセットして新しい入力開始
+    });
+  };
+
+  // 4桁入力されたらメニュー検索
+  useEffect(() => {
+    if (num.length === 4) {
+      const menu = findMenuByCode(num);
+      if (menu) {
+        setSelectedMenu(menu);
+        setOpen(true);
+      }
+    }
+  }, [num]);
+
+  const handleClose = () => {
+    setOpen(false);
+    setNum(""); // 次の入力に備えてクリア
   };
 
   return (
@@ -16,7 +45,11 @@ export default function CodeInput() {
         variant="outlined"
         fullWidth
         value={num}
-        onChange={(e) => setNum(e.target.value)}
+        onChange={(e) => {
+          const value = e.target.value.replace(/\D/g, "").slice(0, 4);
+          setNum(value);
+        }}
+        placeholder="メニュー番号"
       />
 
       <div className="button-row">
@@ -60,6 +93,42 @@ export default function CodeInput() {
           C
         </button>
       </div>
+
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+        <DialogTitle>メニュー確認</DialogTitle>
+        <DialogContent>
+          {selectedMenu ? (
+            <div>
+              <Typography variant="h6" gutterBottom>
+                {selectedMenu.name}
+              </Typography>
+              <Typography variant="body2">
+                コード: {selectedMenu.code}
+              </Typography>
+              <Typography variant="body2">
+                価格: {selectedMenu.priceWithoutTax}円（税込{" "}
+                {selectedMenu.priceWithTax}円）
+              </Typography>
+            </div>
+          ) : (
+            <Typography color="error">
+              該当するメニューが見つかりません。
+            </Typography>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => OrderCart(selectedMenu)}
+            variant="contained"
+            color="primary"
+          >
+            追加
+          </Button>
+          <Button onClick={handleClose} variant="contained" color="primary">
+            閉じる
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

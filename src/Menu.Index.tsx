@@ -20,9 +20,18 @@ export default function MenuIndex() {
       <Card sx={{ minWidth: 200 }}>
         <CardContent>
           <Typography sx={{ mb: 1.5, fontSize: "20px" }}>
-            ミラノ風ドリア
+            小エビのサラダ
           </Typography>
-          <Typography variant="body1">2101</Typography>
+          <Typography variant="body1">1202</Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            319円（税込 350円）
+          </Typography>
+        </CardContent>
+      </Card>
+      <Card sx={{ minWidth: 200 }}>
+        <CardContent>
+          <Typography sx={{ mb: 1.5, fontSize: "20px" }}>辛味チキン</Typography>
+          <Typography variant="body1">1401</Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
             273円（税込 300円）
           </Typography>
@@ -31,9 +40,31 @@ export default function MenuIndex() {
       <Card sx={{ minWidth: 200 }}>
         <CardContent>
           <Typography sx={{ mb: 1.5, fontSize: "20px" }}>
-            ミラノ風ドリア
+            若鶏のディアボラ風
           </Typography>
-          <Typography variant="body1">2101</Typography>
+          <Typography variant="body1">2402</Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            455円（税込 500円）
+          </Typography>
+        </CardContent>
+      </Card>
+      <Card sx={{ minWidth: 200 }}>
+        <CardContent>
+          <Typography sx={{ mb: 1.5, fontSize: "20px" }}>
+            セットドリンクバー
+          </Typography>
+          <Typography variant="body1">5101</Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            182円（税込 200円）
+          </Typography>
+        </CardContent>
+      </Card>
+      <Card sx={{ minWidth: 200 }}>
+        <CardContent>
+          <Typography sx={{ mb: 1.5, fontSize: "20px" }}>
+            たまねぎのズッパ
+          </Typography>
+          <Typography variant="body1">1307</Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
             273円（税込 300円）
           </Typography>
@@ -42,11 +73,22 @@ export default function MenuIndex() {
       <Card sx={{ minWidth: 200 }}>
         <CardContent>
           <Typography sx={{ mb: 1.5, fontSize: "20px" }}>
-            ミラノ風ドリア
+            タラコソースシシリー風
           </Typography>
-          <Typography variant="body1">2101</Typography>
+          <Typography variant="body1">2301</Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            273円（税込 300円）
+            364円（税込 400円）
+          </Typography>
+        </CardContent>
+      </Card>
+      <Card sx={{ minWidth: 200 }}>
+        <CardContent>
+          <Typography sx={{ mb: 1.5, fontSize: "20px" }}>
+            ハンバーグステーキ
+          </Typography>
+          <Typography variant="body1">2406</Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            364円（税込 400円）
           </Typography>
         </CardContent>
       </Card>
