@@ -20,7 +20,9 @@ export default function OrderCart({ cartItems }: OrderCartProps) {
           ))}
         </ul>
       )}
-      <Button>注文を送信する</Button>
+      { (cartItems.length > 0) && (
+        <Button>注文を送信する</Button>
+      )}
     </div>
   );
 }
