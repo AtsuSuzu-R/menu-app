@@ -15,9 +15,7 @@ interface CodeInputProps {
 
 export default function CodeInput({ onAddToCart }: CodeInputProps) {
   const [num, setNum] = useState<string>("");
-  const [selectedMenu, setSelectedMenu] = useState<
-    MenuItem | null | undefined
-  >();
+  const [selectedMenu, setSelectedMenu] = useState<MenuItem | null>(null);
   const [open, setOpen] = useState<boolean>(false);
 
   const handleNumberClick = (value: string): void => {
@@ -35,7 +33,7 @@ export default function CodeInput({ onAddToCart }: CodeInputProps) {
   // 4桁入力されたらメニュー検索
   useEffect(() => {
     if (num.length === 4) {
-      const menu = findMenuByCode(num);
+      const menu = findMenuByCode(num) || null; // Ensure null fallback
       setSelectedMenu(menu);
       setOpen(true);
     }
@@ -52,6 +50,7 @@ export default function CodeInput({ onAddToCart }: CodeInputProps) {
       handleClose();
     }
   };
+
   return (
     <div className="menu-num">
       <TextField

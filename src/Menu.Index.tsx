@@ -13,9 +13,9 @@ export default function MenuIndex() {
             <Typography sx={{ mb: 1.5, fontSize: "20px" }}>
               {menu.name}
             </Typography>
-            <Typography variant="body1">{menu.code}</Typography>
+            <Typography variant="body1">コード: {menu.code}</Typography>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              {menu.priceWithoutTax}円（税込 {menu.priceWithTax}円）
+              税抜: {menu.priceWithoutTax}円 / 税込: {menu.priceWithTax}円
             </Typography>
           </CardContent>
         </Card>
